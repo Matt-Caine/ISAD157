@@ -20,186 +20,140 @@ namespace ISAD157_MySQL_APP
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            showUserInfo();
+            showallMsgs();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void showUserInfo()
         {
-            if (comboBox1.SelectedIndex == 0)
-            {
-
-
-                string connectionString = "SERVER=" + DBConnect.SERVER + ";" +
+            string connectionString = "SERVER=" + DBConnect.SERVER + ";" +
                     "DATABASE=" + DBConnect.DATABASE_NAME + ";" + "UID=" +
                     DBConnect.USER_NAME + ";" + "PASSWORD=" +
                     DBConnect.PASSWORD + ";" + "SslMode=" +
                     DBConnect.SslMode + ";";
-
-
-
-                using (MySqlConnection connection =
-                    new MySqlConnection(connectionString))
-                {
-
-                    string query = "SELECT * FROM ISAD157_MCaine.users";
-
-
-                    connection.Open();
-
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-
-
-                    MySqlDataAdapter sqlDA = new MySqlDataAdapter(cmd);
-                    DataTable UserDataTable = new DataTable();
-                    sqlDA.Fill(UserDataTable);
-
-                    dataGridView1.DataSource = UserDataTable;
-
-                }
+            using (MySqlConnection connection =
+                new MySqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM ISAD157_MCaine.users";
+                connection.Open();
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataAdapter sqlAA = new MySqlDataAdapter(cmd);
+                DataTable UserDataTable = new DataTable();
+                sqlAA.Fill(UserDataTable);
+                userdataGridView1.DataSource = UserDataTable;
+                connection.Close();
             }
-            
-            else if (comboBox1.SelectedIndex == 1)
-            {
-
-
-                string connectionString = "SERVER=" + DBConnect.SERVER + ";" +
-                    "DATABASE=" + DBConnect.DATABASE_NAME + ";" + "UID=" +
-                    DBConnect.USER_NAME + ";" + "PASSWORD=" +
-                    DBConnect.PASSWORD + ";" + "SslMode=" +
-                    DBConnect.SslMode + ";";
-
-
-
-                using (MySqlConnection connection =
-                    new MySqlConnection(connectionString))
-                {
-
-                    string query = "SELECT * FROM ISAD157_Mcaine.friendships";
-
-
-                    connection.Open();
-
-
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-
-                    MySqlDataAdapter sqlDA = new MySqlDataAdapter(cmd);
-                    DataTable FriendshipDataTable = new DataTable();
-                    sqlDA.Fill(FriendshipDataTable);
-
-
-                    dataGridView1.DataSource = FriendshipDataTable;
-                }
-            }
-            
-            else if (comboBox1.SelectedIndex == 2)
-            {
-
-
-                string connectionString = "SERVER=" + DBConnect.SERVER + ";" +
-                    "DATABASE=" + DBConnect.DATABASE_NAME + ";" + "UID=" +
-                    DBConnect.USER_NAME + ";" + "PASSWORD=" +
-                    DBConnect.PASSWORD + ";" + "SslMode=" +
-                    DBConnect.SslMode + ";";
-
-
-
-                using (MySqlConnection connection =
-                    new MySqlConnection(connectionString))
-                {
-
-                    string query = "SELECT * FROM ISAD157_MCaine.messages";
-
-
-                    connection.Open();
-
-
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-
-                    MySqlDataAdapter sqlDA = new MySqlDataAdapter(cmd);
-                    DataTable MsgDataTable = new DataTable();
-                    sqlDA.Fill(MsgDataTable);
-
-
-                    dataGridView1.DataSource = MsgDataTable;
-                }
-            }
-            
-            else if (comboBox1.SelectedIndex == 3)
-            {
-
-
-                string connectionString = "SERVER=" + DBConnect.SERVER + ";" +
-                    "DATABASE=" + DBConnect.DATABASE_NAME + ";" + "UID=" +
-                    DBConnect.USER_NAME + ";" + "PASSWORD=" +
-                    DBConnect.PASSWORD + ";" + "SslMode=" +
-                    DBConnect.SslMode + ";";
-
-
-
-                using (MySqlConnection connection =
-                    new MySqlConnection(connectionString))
-                {
-
-                    string query = "SELECT * FROM ISAD157_MCaine.universities";
-
-
-                    connection.Open();
-
-
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-
-                    MySqlDataAdapter sqlDA = new MySqlDataAdapter(cmd);
-                    DataTable UniversitiesDataTable = new DataTable();
-                    sqlDA.Fill(UniversitiesDataTable);
-
-
-                    dataGridView1.DataSource = UniversitiesDataTable;
-                }
-            }
-            
-            else if (comboBox1.SelectedIndex == 4)
-            {
-
-
-                string connectionString = "SERVER=" + DBConnect.SERVER + ";" +
-                    "DATABASE=" + DBConnect.DATABASE_NAME + ";" + "UID=" +
-                    DBConnect.USER_NAME + ";" + "PASSWORD=" +
-                    DBConnect.PASSWORD + ";" + "SslMode=" +
-                    DBConnect.SslMode + ";";
-
-
-
-                using (MySqlConnection connection =
-                    new MySqlConnection(connectionString))
-                {
-
-                    string query = "SELECT * FROM ISAD157_MCaine.workplaces";
-
-
-                    connection.Open();
-
-
-                    MySqlCommand cmd = new MySqlCommand(query, connection);
-
-                    MySqlDataAdapter sqlDA = new MySqlDataAdapter(cmd);
-                    DataTable WorkplaceDataTable = new DataTable();
-                    sqlDA.Fill(WorkplaceDataTable);
-
-
-                    dataGridView1.DataSource = WorkplaceDataTable;
-                }
-            } 
-
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void showallMsgs()
         {
+            string connectionString = "SERVER=" + DBConnect.SERVER + ";" +
+                    "DATABASE=" + DBConnect.DATABASE_NAME + ";" + "UID=" +
+                    DBConnect.USER_NAME + ";" + "PASSWORD=" +
+                    DBConnect.PASSWORD + ";" + "SslMode=" +
+                    DBConnect.SslMode + ";";
+            using (MySqlConnection connection =
+                new MySqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM ISAD157_MCaine.messages";
+                connection.Open();
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataAdapter sqlAB = new MySqlDataAdapter(cmd);
 
+                DataTable MSGDataTable = new DataTable();
+                sqlAB.Fill(MSGDataTable);
+                MsgdataGridView1.DataSource = MSGDataTable;
+                connection.Close();
+            }
         }
-
-        private void label2_Click(object sender, EventArgs e)
+        private bool firsttime = true;
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            if (firsttime)
+            {
+                usersearch.Clear();
+                firsttime = false;
+            }
+            string connectionString = "SERVER=" + DBConnect.SERVER + ";" +
+                    "DATABASE=" + DBConnect.DATABASE_NAME + ";" + "UID=" +
+                    DBConnect.USER_NAME + ";" + "PASSWORD=" +
+                    DBConnect.PASSWORD + ";" + "SslMode=" +
+                    DBConnect.SslMode + ";";
+            using (MySqlConnection connection =
+                new MySqlConnection(connectionString))
+            {
+                if (usersearch != null && !string.IsNullOrWhiteSpace(usersearch.Text))
+                {
+                    MessageBox.Show("Now Filtering for User ID: " + usersearch.Text);
+
+                }
+                connection.Open();
+                MySqlCommand da = new MySqlCommand("SELECT * FROM Users WHERE UserID LIKE '" + usersearch.Text + "'", connection);
+                MySqlDataAdapter sqlAC = new MySqlDataAdapter(da);
+                DataTable FF = new DataTable();
+                sqlAC.Fill(FF);
+                userdataGridView1.DataSource = FF;
+                connection.Close();
+
+            }
+
 
         }
+
+        private void msgsearch_TextChanged(object sender, EventArgs e)
+        {
+            
+            if (firsttime)
+            {
+                msgsearch.Clear();
+                firsttime = false;
+            }
+            string connectionString = "SERVER=" + DBConnect.SERVER + ";" +
+                   "DATABASE=" + DBConnect.DATABASE_NAME + ";" + "UID=" +
+                   DBConnect.USER_NAME + ";" + "PASSWORD=" +
+                   DBConnect.PASSWORD + ";" + "SslMode=" +
+                   DBConnect.SslMode + ";";
+            using (MySqlConnection connection =
+                new MySqlConnection(connectionString))
+            {
+                if (msgsearch != null && !string.IsNullOrWhiteSpace(msgsearch.Text))
+                {
+                    MessageBox.Show("Now Filtering for Sender User ID: " + msgsearch.Text);
+
+                }
+                connection.Open();
+                MySqlCommand da = new MySqlCommand("SELECT * FROM messages WHERE sender LIKE '" + msgsearch.Text + "'", connection);
+                MySqlDataAdapter sqlAD = new MySqlDataAdapter(da);
+                DataTable FF = new DataTable();
+                sqlAD.Fill(FF);
+                MsgdataGridView1.DataSource = FF;
+                connection.Close();
+
+            }
+            
+        }
+        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Add User");
+        }
+
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Edit User");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Delete User");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Delete Msg");
+        }
+       
     }
 }
