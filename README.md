@@ -7,5 +7,5 @@ The aim of this assignment was to focus on the analysis and design of a data app
 
 I used MySQL workbench as the mechanism to store the data and C# - written in Visual Studio, to illustrate a sample interface for my model.
 
-###Final GUI
+Final GUI
 ![Screenshot](https://github.com/Matt-Caine/ISAD157/blob/master/Screenshots/Isad157FinalGUI.png)
